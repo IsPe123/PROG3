@@ -1,22 +1,22 @@
-public class MySimpleLinkedList<T> implements Iterable<T> {
+public class MySimpleLinkedListInteger<Integer> implements Iterable<Integer> {
 
-	private Node<T> first;
+	private NodeInteger<Integer> first;
 	private int cant;
 
-	public MySimpleLinkedList() {
+	public MySimpleLinkedListInteger() {
 		this.first = null;
 		this.cant = 0;
 	}
 
-	public void insertFront(T info) {
-		Node<T> tmp = new Node<T>(info, null);
+	public void insertFront(Integer info) {
+		NodeInteger<Integer> tmp = new NodeInteger<Integer>(info, null);
 		tmp.setNext(this.first);
 		this.first = tmp;
 	}
 
-	public T extractFront() {
+	public Integer extractFront() {
 		if (this.first.getNext() != null) {
-			Node<T> eliminado = this.first;
+			NodeInteger<Integer> eliminado = this.first;
 			this.first = eliminado.getNext();
 			eliminado.setNext(null); // no es necesario. El garbage collector se fija solo si alguien lo está
 										// referenciando, no si el nodo referencia a alguien
@@ -33,8 +33,8 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 		return false;
 	}
 
-	public T get(int index) {
-		Node<T> temp = this.first;
+	public Integer get(int index) {
+		NodeInteger<Integer> temp = this.first;
 		while (temp != null && index != 0) {
 			temp = temp.getNext();
 			index--;
@@ -52,7 +52,7 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 	@Override
 	public String toString() {
 		String resultado = "{";
-		Node<T> temp = this.first;
+		NodeInteger<Integer> temp = this.first;
 		while (temp != null) {
 			resultado += temp.toString();
 			temp = temp.getNext();
@@ -64,8 +64,8 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 		return resultado;
 	}
 
-	public int indexOf(T info) {
-		Node<T> temp = this.first;
+	public int indexOf(Integer info) {
+		NodeInteger<Integer> temp = this.first;
 		int index = 0;
 
 		while (temp != null && !temp.getInfo().equals(info)) {
@@ -79,13 +79,28 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 		return -1;
 	}
 
-	@Override
-	public MyIterator<T> iterator() {
-		return new MyIterator<T>(this.first);
+	public boolean contains(Integer ii) {
+		NodeInteger<Integer> temp = this.first;
+		while (temp != null) {
+			if ( temp.getInfo().equals(ii)) {
+				return true;
+			}
+			temp = temp.getNext();
+		}
+		return false;
 	}
 
-/* 	public MySimpleLinkedList<T> buscarIguales(MySimpleLinkedList<T> ll) {
-		MySimpleLinkedList<T> salida = new MySimpleLinkedList<>();
+	public MySimpleLinkedListInteger<Integer> sort() {
+		// to be continued ...
+	}
+
+	@Override
+	public MyIteratorInteger<Integer> iterator() {
+		return new MyIteratorInteger<Integer>(this.first);
+	}
+
+/* 	public MySimpleLinkedList<Integer> buscarIguales(MySimpleLinkedList<Integer> ll) {
+		MySimpleLinkedList<Integer> salida = new MySimpleLinkedList<>();
 		Iterator<String> it = listaString.iterator();
 		for(T tt: ll) {
 
