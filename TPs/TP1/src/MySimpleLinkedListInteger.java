@@ -82,7 +82,7 @@ public class MySimpleLinkedListInteger<Integer> implements Iterable<Integer> {
 	public boolean contains(Integer ii) {
 		NodeInteger<Integer> temp = this.first;
 		while (temp != null) {
-			if ( temp.getInfo().equals(ii)) {
+			if (temp.getInfo().equals(ii)) {
 				return true;
 			}
 			temp = temp.getNext();
@@ -90,21 +90,12 @@ public class MySimpleLinkedListInteger<Integer> implements Iterable<Integer> {
 		return false;
 	}
 
-	public MySimpleLinkedListInteger<Integer> sort() {
-		// to be continued ...
-	}
-
 	@Override
 	public MyIteratorInteger<Integer> iterator() {
-		return new MyIteratorInteger<Integer>(this.first);
+		return new MyIteratorInteger<>(this.first);
 	}
 
-/* 	public MySimpleLinkedList<Integer> buscarIguales(MySimpleLinkedList<Integer> ll) {
-		MySimpleLinkedList<Integer> salida = new MySimpleLinkedList<>();
-		Iterator<String> it = listaString.iterator();
-		for(T tt: ll) {
-
-		}
-	} */
+	//TP Arboles:
+	
 
 }

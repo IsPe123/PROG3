@@ -1,9 +1,9 @@
 import java.util.Iterator;
 
-public class MyIteratorInteger<T> implements Iterator<T> {
-    private NodeInteger<T> temp;
+public class MyIteratorInteger<Integer> implements Iterator<Integer> {
+    private NodeInteger<Integer> temp;
 
-    public MyIteratorInteger(NodeInteger<T> nn) {
+    public MyIteratorInteger(NodeInteger<Integer> nn) {
         this.temp = nn;
     }
 
@@ -13,8 +13,8 @@ public class MyIteratorInteger<T> implements Iterator<T> {
     }
 
     @Override
-    public T next() {
-        T salida = temp.getInfo();
+    public Integer next() {
+        Integer salida = temp.getInfo();
         this.temp = temp.getNext();
         return salida; 
     }

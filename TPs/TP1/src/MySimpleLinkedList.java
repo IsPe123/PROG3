@@ -81,15 +81,8 @@ public class MySimpleLinkedList<T> implements Iterable<T> {
 
 	@Override
 	public MyIterator<T> iterator() {
-		return new MyIterator<T>(this.first);
+		return new MyIterator<>(this.first);
 	}
 
-/* 	public MySimpleLinkedList<T> buscarIguales(MySimpleLinkedList<T> ll) {
-		MySimpleLinkedList<T> salida = new MySimpleLinkedList<>();
-		Iterator<String> it = listaString.iterator();
-		for(T tt: ll) {
-
-		}
-	} */
 
 }

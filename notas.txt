@@ -1,0 +1,46 @@
+Iterator:
+
+
+1) Se implementa a la clase MySimpleLinkedList el iterator<T>
+	(public class MySimpleLinkedList<T> implements Iterable<T>)
+	
+
+   Junto al método:
+
+	@Override
+	public MyIterator<T> iterator() {
+		return new MyIterator<>(this.first);
+	}
+
+
+
+
+2) Se crea la clase MyIterator con los siguientes metodos:
+
+public class MyIterator<T> implements Iterator<T> {
+    private Node<T> temp;
+
+    public MyIterator(Node<T> nn) {
+        this.temp = nn;
+    }
+
+    @Override
+    public boolean hasNext() {
+        return temp != null;
+    }
+
+    @Override
+    public T next() {
+        T salida = temp.getInfo();
+        this.temp = temp.getNext();
+        return salida; 
+    }
+}
+
+
+
+
+
+
+
+//Nodo interno seria nodo y Nodo externo seria hoja
