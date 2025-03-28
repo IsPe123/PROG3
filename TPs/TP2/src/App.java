@@ -1,8 +1,8 @@
 public class App {
     public static void main(String[] args) {
-        int[] arr1 = { 2, 3, 1, 5, 7 };
+        int[] arr1 = { 3, 4, 1, 5, 7 };
         int[] arr2 = { 2, 4, 6, 8, 10 };
-        int[] arr3 = { -3, -1, 0, 2, 4, 6, 10 };
+        int[] arr3 = { 3, -1, 0, 2, 10, 4, 7 };
 
         System.out.println(isSorted(arr1));
         System.out.println(isSorted(arr2));
@@ -15,6 +15,10 @@ public class App {
 
         System.out.println(fibonacci(50));
 
+        System.out.println(coinciden(arr3));
+
+        ordenarBurbujeo(arr3);
+        imprimirArreglo(arr3);
         // System.out.println(hasSameValueAIndex(arr2));
     }
 
@@ -34,7 +38,7 @@ public class App {
             return true;
         }
     }
-    
+
     // EJ 2
     // Deberia implementar una busqueda binaria
 
@@ -56,12 +60,14 @@ public class App {
 
     // OPCION 1
     public static String convertirABinario(int numero) {
-        if (numero == 0) return "0";
-        if (numero == 1) return "1";
+        if (numero == 0)
+            return "0";
+        if (numero == 1)
+            return "1";
         return convertirABinario(numero / 2) + (numero % 2);
     }
 
-    //OPCION 2
+    // OPCION 2
     public static String toBinary(double num) {
         String res = "";
         res = appendDigit(res, num);
@@ -81,14 +87,14 @@ public class App {
     public static String fibonacci(int n) {
         String res = "";
 
-        if (n <= 1) return res = "0";
-        if (n == 2) return res = "0 1";
+        if (n <= 1)
+            return res = "0";
+        if (n == 2)
+            return res = "0 1";
 
         res = fib(n, 1, 0);
         return res;
     }
-
-    // Seguir por aca, EJ 5
 
     public static String fib(int counter, int actual, int prev) {
 
@@ -100,17 +106,51 @@ public class App {
 
     }
 
-    public static boolean hasSameValueAIndex(Integer[] arr) {
+    // EJ 5
 
-        return sameValue(arr, 0);
+    public static boolean coinciden(int[] arr) {
+        int i = 0;
+        return coincidenRecorrer(arr, i);
     }
 
-    public static boolean sameValue(Integer[] arr, int i) {
-        if (i > arr.length || arr[i] > (i)) {
-            return false;
+    public static boolean coincidenRecorrer(int[] arr, int i) {
+        if (arr.length > i) {
+            if (arr[i] == i) {
+                return true;
+            } else {
+                return coincidenRecorrer(arr, ++i);
+            }
+        }
+        return false;
+    }
+
+
+    // EJ 6
+
+    public static void ordenarBurbujeo(int[] arr) {
+        boolean swapped = true;
+        int j = 0;
+        int tmp;
+        while (swapped) {
+            swapped = false;
+            j++;
+            for (int i = 0; i < arr.length - j; i++) {
+                if (arr[i] > arr[i + 1]) {
+                    tmp = arr[i];
+                    arr[i] = arr[i + 1];
+                    arr[i + 1] = tmp;
+                    swapped = true;
+                }
+            }
         }
 
-        return i == arr[i] || sameValue(arr, i + 1);
-
     }
+
+    public static void imprimirArreglo(int[] arr) {
+        String salida = "";
+        for (int i : arr) {
+            salida = salida + " " + i;           
+        }
+        System.out.println(salida);
+    } 
 }
