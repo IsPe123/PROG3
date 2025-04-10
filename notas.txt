@@ -44,3 +44,4 @@ public class MyIterator<T> implements Iterator<T> {
 
 
 //Nodo interno seria nodo y Nodo externo seria hoja
+
