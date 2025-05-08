@@ -17,6 +17,21 @@ public class Main {
 		Float etiqueta = grafito.obtenerArco(1, 2).getEtiqueta();
 		
 		System.out.println(etiqueta); // Debería imprimir 3
+
+
+		//////////////////
+
+
+
+		GrafoDirigido gd = new GrafoDirigido<>();
+
+		gd.agregarVertice(1);
+		gd.agregarVertice(2);
+		gd.agregarVertice(3);
+		gd.agregarVertice(4);
+
+		//////////////////
+
 	}
 
 }

@@ -1,21 +1,62 @@
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 public class GrafoDirigido<T> implements Grafo<T> {
 
+	private ArrayList<Vertice<T>> listaVertices;
+
+	public GrafoDirigido() {
+		this.listaVertices = new ArrayList<Vertice<T>>();
+	}
+
 	@Override
 	public void agregarVertice(int verticeId) {
-		// TODO Auto-generated method stub
+		listaVertices.add(new Vertice<T>(verticeId));
 	}
 
 	@Override
 	public void borrarVertice(int verticeId) {
-		// TODO Auto-generated method stub
+		for (Vertice vertice : listaVertices) {
+			ArrayList<Arco> arcos = vertice.getArcos();
+			for (Arco arco : arcos) {
+				if (arco.getVerticeDestino() == verticeId || arco.getVerticeOrigen() == verticeId) {
+					vertice.deleteArco(arco);
+				}
+			}
+		}
+		listaVertices.remove(verticeId);
 	}
+
+	// lista[
+	//         [1, listaArcos]
+	//         [2, listaArcos]
+	//         [3, listaArcos]
+	//         [4, listaArcos]
+	//      ]
+
 
 	@Override
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
-		// TODO Auto-generated method stub
+		//Verificamos si existen los vertices pues no vas a agregar un arco en vertices que no existen xd 
+		if(!listaVertices.contains(verticeId1) && !listaVertices.contains(verticeId2)) {
+			System.out.println("El vertice no existe");
+			return;
+		}
+
+
+//agregar si existe el arco 
+/*
+ 		if(listaVertices.existeArco(verticeId1, verticeId2)) {
+			System.out.println("El arco ya existe");
+			return;
+		} */
+		for (Vertice<T> verticePapurri : listaVertices) {
+			if (verticePapurri.getId() == verticeId1) {
+				verticePapurri.crearArco(verticeId2, etiqueta);	
+				return;
+			}
+		}
 	}
 
 	@Override
