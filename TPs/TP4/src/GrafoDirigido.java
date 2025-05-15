@@ -5,9 +5,11 @@ import java.util.Iterator;
 public class GrafoDirigido<T> implements Grafo<T> {
 
 	private ArrayList<Vertice<T>> listaVertices;
-
+    private ArrayList<Arco> arcos;
+	
 	public GrafoDirigido() {
 		this.listaVertices = new ArrayList<Vertice<T>>();
+		this.arcos = new ArrayList<Arco>();
 	}
 
 	@Override
@@ -18,14 +20,10 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	@Override
 	public void borrarVertice(int verticeId) {
 		for (Vertice vertice : listaVertices) {
-			ArrayList<Arco> arcos = vertice.getArcos();
-			for (Arco arco : arcos) {
-				if (arco.getVerticeDestino() == verticeId || arco.getVerticeOrigen() == verticeId) {
-					vertice.deleteArco(arco);
-				}
+			if (vertice.getId() == verticeId) {
+				listaVertices.remove(vertice);
 			}
 		}
-		listaVertices.remove(verticeId);
 	}
 
 	// lista[
@@ -35,87 +33,112 @@ public class GrafoDirigido<T> implements Grafo<T> {
 	//         [4, listaArcos]
 	//      ]
 
-
 	@Override
 	public void agregarArco(int verticeId1, int verticeId2, T etiqueta) {
-		//Verificamos si existen los vertices pues no vas a agregar un arco en vertices que no existen xd 
-		if(!listaVertices.contains(verticeId1) && !listaVertices.contains(verticeId2)) {
-			System.out.println("El vertice no existe");
-			return;
+		if(existeVertice(verticeId1) && existeVertice(verticeId2)) {
+			Arco aa = new Arco<T>(verticeId1, verticeId2, etiqueta);
+			arcos.add(aa);
+		} else {
+			System.out.println("Flashaste negro");
 		}
+	}
 
+	public boolean existeVertice(int ID) {
+		for (Vertice vv : listaVertices) {
+			if(vv.contains(ID)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-//agregar si existe el arco 
-/*
- 		if(listaVertices.existeArco(verticeId1, verticeId2)) {
-			System.out.println("El arco ya existe");
-			return;
-		} */
-		for (Vertice<T> verticePapurri : listaVertices) {
-			if (verticePapurri.getId() == verticeId1) {
-				verticePapurri.crearArco(verticeId2, etiqueta);	
-				return;
+	@Override
+	public void borrarArco(int verticeId1, int verticeId2) {
+		for (Arco aa : arcos) {
+			if (aa.contains(verticeId1, verticeId2)) {
+				arcos.remove(aa);
 			}
 		}
 	}
 
 	@Override
-	public void borrarArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
-	}
-
-	@Override
 	public boolean contieneVertice(int verticeId) {
-		// TODO Auto-generated method stub
+		for (Vertice vertice : listaVertices) {
+			if(vertice.getId() == verticeId) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean existeArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
+		for (Arco aa : arcos) {
+			if (aa.contains(verticeId1, verticeId2)) {
+				return true;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public Arco<T> obtenerArco(int verticeId1, int verticeId2) {
-		// TODO Auto-generated method stub
+		for (Arco arco : arcos) {
+			if (arco.contains(verticeId1, verticeId2)) {
+				Arco copia = new Arco<T>(arco.getVerticeOrigen(), arco.getVerticeDestino(), (T)arco.getEtiqueta());
+				return copia;
+			}
+		}
 		return null;
 	}
 
 	@Override
 	public int cantidadVertices() {
-		// TODO Auto-generated method stub
-		return 0;
+		return listaVertices.size();
 	}
 
 	@Override
 	public int cantidadArcos() {
-		// TODO Auto-generated method stub
-		return 0;
+		return arcos.size();
 	}
 
 	@Override
-	public Iterator<Integer> obtenerVertices() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+    public Iterator<Integer> obtenerVertices() {
+        ArrayList<Integer> result = new ArrayList<>();
+        for (Vertice vertice : listaVertices) {
+			result.add(vertice.getId());
+		}
+        return result.iterator();
+    } 
+
 
 	@Override
 	public Iterator<Integer> obtenerAdyacentes(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+        ArrayList<Integer> result = new ArrayList<>();
+        for (Arco aa : arcos) {
+			if (aa.getVerticeOrigen() == verticeId) {
+				result.add(aa.getVerticeDestino());	
+			}
+		}
+        return result.iterator();
 	}
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Arco<T>> res = new ArrayList<>(arcos);
+		return res.iterator();
 	}
 
 	@Override
 	public Iterator<Arco<T>> obtenerArcos(int verticeId) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Arco<T>> res = new ArrayList<>();
+		for (Arco arco : arcos) {
+			if (arco.containsOrigen(verticeId)) {
+				res.add(arco);
+			}
+		}
+		return res.iterator();
 	}
+
 
 }

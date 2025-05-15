@@ -28,4 +28,17 @@ public class Arco<T> {
 		return etiqueta;
 	}
 
+	public boolean equals(Arco<T> arco) {
+		return this.verticeOrigen == arco.getVerticeOrigen() && 
+			   this.verticeDestino == arco.getVerticeDestino();
+	}
+
+	public boolean contains(int vo, int vd) {
+		return this.verticeOrigen == vo && this.verticeDestino == vd;
+	}
+
+	public boolean containsOrigen(int vo) {
+		return this.verticeOrigen == vo;
+	}
+
 }
